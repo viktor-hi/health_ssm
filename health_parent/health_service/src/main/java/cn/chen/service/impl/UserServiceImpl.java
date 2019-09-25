@@ -1,8 +1,10 @@
 package cn.chen.service.impl;
 
+import cn.chen.constant.MessageConstant;
 import cn.chen.dao.UserDao;
 import cn.chen.entity.PageResult;
 import cn.chen.entity.QueryPageBean;
+import cn.chen.exception.MyException;
 import cn.chen.pojo.CheckItem;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
@@ -35,11 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(int id) throws MyException{
         int num = userdao.findCountById(id);
         if (num>0) {
             // 有引用，不允许删除
-
+            throw new MyException(MessageConstant.DELETE_CHECKITEM_FAIL_USED);
         }
         userdao.deleteById(id);
     }

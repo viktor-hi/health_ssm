@@ -43,7 +43,6 @@ public class UserController {
 
     @PostMapping("/delete")
     public Result deleteById(int id){
-        System.out.println(id);
         userService.deleteById(id);
         return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
