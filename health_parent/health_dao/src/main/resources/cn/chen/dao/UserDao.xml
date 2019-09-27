@@ -23,4 +23,8 @@
     <delete id="deleteById" parameterType="int">
         delete from t_checkitem where id=#{id}
     </delete>
+    <!--查找所有检查项目-->
+    <select id="findAll" resultType="CheckItem">
+        select * from t_checkitem
+    </select>
 </mapper>

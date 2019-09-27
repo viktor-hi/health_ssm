@@ -2,6 +2,9 @@ package cn.chen.dao;
 
 import cn.chen.pojo.CheckItem;
 import com.github.pagehelper.Page;
+
+import java.util.List;
+
 /**
  * @author haixin
  * @time 2019-09-22
@@ -15,4 +18,6 @@ public interface UserDao {
     int findCountById(int id);
 
     void deleteById(int id);
+
+    List<CheckItem> findAll();
 }

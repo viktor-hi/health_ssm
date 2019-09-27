@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import cn.chen.service.UserService;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * @author haixin
  * @time 2019-09-22
@@ -44,5 +46,10 @@ public class UserServiceImpl implements UserService {
             throw new MyException(MessageConstant.DELETE_CHECKITEM_FAIL_USED);
         }
         userdao.deleteById(id);
+    }
+
+    @Override
+    public List<CheckItem> findAll() {
+        return userdao.findAll();
     }
 }

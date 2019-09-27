@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author haixin
  * @time 2019-09-22
@@ -45,5 +47,10 @@ public class UserController {
     public Result deleteById(int id){
         userService.deleteById(id);
         return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
+    }
+    @RequestMapping("/findAll")
+    public Result findAll(){
+        List<CheckItem> checkItemList = userService.findAll();
+        return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItemList);
     }
 }

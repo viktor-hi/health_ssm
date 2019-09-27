@@ -5,6 +5,8 @@ import cn.chen.entity.QueryPageBean;
 import cn.chen.exception.MyException;
 import cn.chen.pojo.CheckItem;
 
+import java.util.List;
+
 /**
  * @author haixin
  * @time 2019-09-22
@@ -15,4 +17,6 @@ public interface UserService {
     PageResult<CheckItem> findPage(QueryPageBean queryPageBean);
 
     void deleteById(int id) throws MyException;
+
+    List<CheckItem> findAll();
 }
