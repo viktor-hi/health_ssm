@@ -82,4 +82,9 @@ public class GroupServiceImpl implements GroupService {
         GroupDao.deleteAssociation(groupId);
         GroupDao.deleteGroupById(groupId);
     }
+
+    @Override
+    public List<CheckGroup> findAll() {
+        return GroupDao.findAll();
+    }
 }

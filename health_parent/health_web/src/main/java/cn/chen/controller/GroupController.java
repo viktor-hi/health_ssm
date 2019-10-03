@@ -65,4 +65,10 @@ public class GroupController {
         groupService.deleteById(id);
         return new Result(true,MessageConstant.DELETE_CHECKGROUP_SUCCESS);
     }
+
+    @GetMapping("/findAll")
+    public Result findAll(){
+        List<CheckGroup> groups=groupService.findAll();
+        return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS,groups);
+    }
 }

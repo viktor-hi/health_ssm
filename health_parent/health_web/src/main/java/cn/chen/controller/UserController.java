@@ -45,9 +45,11 @@ public class UserController {
 
     @PostMapping("/delete")
     public Result deleteById(int id){
+        System.out.println(id);
         userService.deleteById(id);
         return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
+
     @RequestMapping("/findAll")
     public Result findAll(){
         List<CheckItem> checkItemList = userService.findAll();

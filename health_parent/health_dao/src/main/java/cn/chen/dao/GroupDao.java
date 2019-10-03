@@ -28,4 +28,6 @@ public interface GroupDao {
     void updataGroup(CheckGroup checkGroup);
 
     void deleteGroupById(Integer groupId);
+
+    List<CheckGroup> findAll();
 }

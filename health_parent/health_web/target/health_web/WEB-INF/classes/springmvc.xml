@@ -12,17 +12,18 @@
 <!--    dubbo应用名称-->
     <dubbo:application name="health_controller"/>
 <!--    指定服务注册中心地址-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zookeeper://172.20.10.2:2181"/>
 <!--    dubbo宝扫描-->
     <dubbo:annotation package="cn.chen.controller"/>
 <!--    设置超时全局时间，check是否检测服务提供方是否开启-->
     <dubbo:consumer check="false" timeout="6000000"/>
 
 <!--    文件上传组件-->
-    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="resolver">
-        <property name="maxInMemorySize" value="4096"/>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="104857600"/>
-        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxInMemorySize" value="4096"/>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">

@@ -2,7 +2,6 @@ package cn.chen.service;
 
 import cn.chen.entity.PageResult;
 import cn.chen.entity.QueryPageBean;
-import cn.chen.exception.MyException;
 import cn.chen.pojo.CheckItem;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface UserService {
 
     PageResult<CheckItem> findPage(QueryPageBean queryPageBean);
 
-    void deleteById(int id) throws MyException;
+    void deleteById(int id);
 
     List<CheckItem> findAll();
 }
