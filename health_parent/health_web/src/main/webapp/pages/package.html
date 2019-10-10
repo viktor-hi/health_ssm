@@ -282,7 +282,7 @@
             pagination: {//分页相关属性
                 currentPage: 1,
                 pageSize: 10,
-                total: 100,
+                total: 0,
                 queryString: null,
             },
             dataList: [],//列表数据
@@ -319,6 +319,7 @@
                 this.tableData = [];
                 this.checkgroupIds=[];
                 this.activeName = 'first';
+                this.imageUrl=null;
             },
             //添加
             handleAdd() {
@@ -335,6 +336,14 @@
             },
             //分页查询
             findPage() {
+                axios.post('/package/findPage.do',this.pagination).then(res =>{
+                    this.$message({
+                        message: res.data.message,
+                        type: res.data.flag?'success':'error'
+                    });
+                    this.dataList = res.data.data.rows;
+                    this.pagination.total = res.data.data.total;
+                })
 
             },
             //文件上传成功后的钩子，res为服务端返回的值，file为当前上传的文件封装成的js对象

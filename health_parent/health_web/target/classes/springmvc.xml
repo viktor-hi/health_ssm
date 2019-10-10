@@ -46,4 +46,6 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+    <!--导入redis配置-->
+    <import resource="classpath:spring-redis.xml"/>
 </beans>

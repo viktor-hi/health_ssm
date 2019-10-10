@@ -13,4 +13,73 @@
     <insert id="addPackageCheckGroup" parameterType="int">
         insert into t_package_checkgroup values (#{pkgId}, #{checkgroupId})
     </insert>
+
+<!--    分页查询-->
+    <select id="findPage" parameterType="String" resultType="Package">
+        select * from t_package
+        <if test="value != null and value.length > 0">
+            where code like #{value} or name like #{value}
+        </if>
+    </select>
+    <!--查询所有数据-->
+    <select id="findAll" resultType="Package">
+        select * from t_package
+    </select>
+    <!--根据id查询检查套餐-->
+    <!--<select id="findById" parameterType="int" resultMap="packageCheckGroupCheckItemResultMap">
+        select p.*,
+			pc.checkgroup_id,g.name as checkgroup_name,g.remark as checkgroup_remark,
+			cc.checkitem_id, i.name as checkitem_name
+        from t_package p, t_checkgroup g, t_checkitem i,
+        t_checkgroup_checkitem cc,t_package_checkgroup pc
+        where p.id=#{id}
+        and p.id=pc.package_id and pc.checkgroup_id=g.id
+        and g.id=cc.checkgroup_id and cc.checkitem_id=i.id
+    </select>
+    <resultMap id="packageCheckGroupCheckItemResultMap" type="package">
+        &lt;!&ndash;套餐&ndash;&gt;
+        <id property="id" column="id"/>
+        <result property="name" column="name" />
+        <result property="code" column="code" />
+        <result property="helpCode" column="helpCode" />
+        <result property="sex" column="sex" />
+        <result property="age" column="age" />
+        <result property="price" column="price" />
+        <result property="remark" column="remark" />
+        <result property="attention" column="attention" />
+        <result property="img" column="img" />
+        &lt;!&ndash;检查组&ndash;&gt;
+        <collection property="checkGroups" ofType="CheckGroup" javaType="List">
+            <id property="id" column="checkgroup_id"/>
+            <result property="name" column="checkgroup_name"/>
+            <result property="remark" column="checkgroup_remark"/>
+            &lt;!&ndash;检查项&ndash;&gt;
+            <collection property="checkItems" ofType="CheckItem" javaType="List">
+                <id property="id" column="checkitem_id"/>
+                <result property="name" column="checkitem_name"/>
+            </collection>
+        </collection>
+    </resultMap>-->
+    <select id="findById" parameterType="int" resultMap="myResultMap">
+      select p.*,
+      pc.checkgroup_id,cp.name as checkgroup_name, cp.remark as checkgroup_remark,
+      cc.checkitem_id,ci.name as checkitem_name
+      from t_package p
+      inner join t_package_checkgroup pc on p.id=pc.package_id
+      inner join t_checkgroup cp on cp.id=pc.checkgroup_id
+      inner join t_checkgroup_checkitem cc on cc.checkgroup_id=cp.id
+      inner join t_checkitem ci on ci.id=cc.checkitem_id
+      where p.id=#{id}
+    </select>
+    <resultMap id="myResultMap" type="Package" extends="packageResultMap">
+        <collection property="checkGroups" column="checkgroup_id" javaType="List" ofType="CheckGroup">
+            <id column="checkgroup_id" property="id"/>
+            <result column="checkgroup_name" property="name"/>
+            <result column="checkgroup_remark" property="remark"/>
+            <collection property="checkItems" column="checkitem_id" javaType="List" ofType="CheckItem">
+                <id column="checkitem_id" property="id"/>
+                <result column="checkitem_name" property="name"/>
+            </collection>
+        </collection>
+    </resultMap>
 </mapper>
