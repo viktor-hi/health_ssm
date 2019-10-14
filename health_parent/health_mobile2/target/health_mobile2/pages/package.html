@@ -25,7 +25,7 @@
             <ul class="list">
                 <li class="list-item" v-for="package in packageList">
                     <a class="link-page" :href="'package_detail.html?id='+package.id">
-                    <img class="img-object f-left" :src="'http://127.0.0.1:9090/uploads/'+package.img" alt="">
+                    <img class="img-object f-left" :src="package.img" alt="">
                     <div class="item-body">
                         <h4 class="ellipsis item-title">{{package.name}}</h4>
                         <p class="ellipsis-more item-desc">{{package.remark}}</p>

@@ -4,6 +4,7 @@ import cn.chen.dao.UserDao;
 import cn.chen.entity.PageResult;
 import cn.chen.entity.QueryPageBean;
 import cn.chen.pojo.CheckItem;
+import cn.chen.pojo.User;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -50,5 +51,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<CheckItem> findAll() {
         return userdao.findAll();
+    }
+
+    //查询用户通过用户名
+    @Override
+    public User findUserByUsername(String username) {
+
+        User user = userdao.findUserByUsername(username);
+        return user;
     }
 }

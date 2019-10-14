@@ -33,12 +33,16 @@
             <div class="contentBox">
                 <div class="card">
                     <div class="">
-                        <img :src="'http://127.0.0.1:9090/uploads/'+setmeal.img" width="100%" height="100%" />
+                        <img :src="setmeal.img" width="100%" height="100%" />
                     </div>
                     <div class="project-text">
                         <h4 class="tit">{{setmeal.name}}</h4>
                         <p class="subtit">{{setmeal.remark}}</p>
-                        <p class="keywords"><span>女</span><span>20-70</span></p>
+                        <p class="keywords">
+                            <!--把pakcage.sex设置给showGender-->
+                            <span>{{setmeal.sex | showGender}}</span>
+                            <span>{{setmeal.age}}</span>
+                        </p>
                     </div>
                     <div class="project-know">
                         <a href="orderNotice.html" class="link-page">
@@ -106,6 +110,16 @@
                         setmealId:id,
                         sex:'1'
                     }//预约信息
+                }, // 过滤器，格式化输出
+                filters:{
+                    showGender(value){
+                        //{{package.sex == '0' ? '性别不限' : package.sex == '1' ? '男':'女'}}
+                        switch (value * 1){
+                            case 0: return '性别不限';
+                            case 1: return '男';
+                            default: return '女';
+                        }
+                    }
                 },
                 methods:{
                     //发送验证码
@@ -118,10 +132,11 @@
                         validateCodeButton = $("#validateCodeButton")[0];
                         clock = window.setInterval(doLoop, 1000); //一秒执行一次
                         axios.post("/validateCode/send4Order.do?telephone=" + telephone).then((response) => {
-                            if(!response.data.flag){
-                                //验证码发送失败
-                                this.$message.error('验证码发送失败，请检查手机号输入是否正确');
-                            }
+                            this.$message({
+                                message : response.data.message,
+                                type: response.data.flag?'success':'error'
+
+                            });
                         });
                     },
                     //提交预约
@@ -143,7 +158,7 @@
                     }
                 },
                 mounted(){
-                    axios.post("/setmeal/findById.do?id=" + id).then((response) => {
+                    axios.post("/package/findById.do?id=" + id).then((response) => {
                         this.setmeal = response.data.data;
                     });
                 }

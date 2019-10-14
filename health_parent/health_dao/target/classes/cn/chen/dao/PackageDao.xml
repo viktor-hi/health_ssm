@@ -26,7 +26,7 @@
         select * from t_package
     </select>
     <!--根据id查询检查套餐-->
-    <!--<select id="findById" parameterType="int" resultMap="packageCheckGroupCheckItemResultMap">
+    <select id="findById" parameterType="int" resultMap="packageCheckGroupCheckItemResultMap">
         select p.*,
 			pc.checkgroup_id,g.name as checkgroup_name,g.remark as checkgroup_remark,
 			cc.checkitem_id, i.name as checkitem_name
@@ -37,7 +37,7 @@
         and g.id=cc.checkgroup_id and cc.checkitem_id=i.id
     </select>
     <resultMap id="packageCheckGroupCheckItemResultMap" type="package">
-        &lt;!&ndash;套餐&ndash;&gt;
+        <!--套餐-->
         <id property="id" column="id"/>
         <result property="name" column="name" />
         <result property="code" column="code" />
@@ -48,19 +48,19 @@
         <result property="remark" column="remark" />
         <result property="attention" column="attention" />
         <result property="img" column="img" />
-        &lt;!&ndash;检查组&ndash;&gt;
+        <!--检查组-->
         <collection property="checkGroups" ofType="CheckGroup" javaType="List">
             <id property="id" column="checkgroup_id"/>
             <result property="name" column="checkgroup_name"/>
             <result property="remark" column="checkgroup_remark"/>
-            &lt;!&ndash;检查项&ndash;&gt;
+            <!--检查项-->
             <collection property="checkItems" ofType="CheckItem" javaType="List">
                 <id property="id" column="checkitem_id"/>
                 <result property="name" column="checkitem_name"/>
             </collection>
         </collection>
-    </resultMap>-->
-    <select id="findById" parameterType="int" resultMap="myResultMap">
+    </resultMap>
+<!--    <select id="findById" parameterType="int" resultMap="myResultMap">
       select p.*,
       pc.checkgroup_id,cp.name as checkgroup_name, cp.remark as checkgroup_remark,
       cc.checkitem_id,ci.name as checkitem_name
@@ -81,5 +81,5 @@
                 <result column="checkitem_name" property="name"/>
             </collection>
         </collection>
-    </resultMap>
+    </resultMap>-->
 </mapper>

@@ -19,4 +19,6 @@ public interface OrderSettingDao {
     void add(OrderSetting orderSetting);
 
     List<OrderSetting> findOrderSettingByDates(@Param("startDate") String startDate,@Param("endDate")  String endDate);
+
+    void deleteByDay(@Param("startDate") String startDate,@Param("endDate") String endDate);
 }

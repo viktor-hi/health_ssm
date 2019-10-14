@@ -3,6 +3,7 @@ package cn.chen.service;
 import cn.chen.entity.PageResult;
 import cn.chen.entity.QueryPageBean;
 import cn.chen.pojo.CheckItem;
+import cn.chen.pojo.User;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface UserService {
     void deleteById(int id);
 
     List<CheckItem> findAll();
+
+    User findUserByUsername(String username);
 }

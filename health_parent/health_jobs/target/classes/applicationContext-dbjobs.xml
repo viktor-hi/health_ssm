@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--自动依赖注入-->
+    <context:component-scan base-package="cn.chen.jobs"/>
+    <!--注册自定义job-->
+    <bean id="jobDemo" class="cn.chen.jobs.ClearOrderSetting"/>
+    <!-- 注册JobDetail,作用是负责通过反射调用指定的Job -->
+    <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" id="jobDetail">
+        <property name="targetObject" ref="jobDemo"/>
+        <property name="targetMethod" value="clearDB"/>
+    </bean>
+    <!-- 注册一个触发器，指定任务触发的时间 -->
+    <bean class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" id="myTrigger">
+        <property name="jobDetail" ref="jobDetail"/>
+        <property name="cronExpression">
+            <value>10 * * * * ?</value>
+<!--            0 59 23 L * ?-->
+        </property>
+    </bean>
+    <!-- 注册一个统一的调度工厂，通过这个调度工厂调度任务 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" id="schedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="myTrigger"/>
+            </list>
+        </property>
+    </bean>
+    <import resource="classpath:spring-dao.xml"/>
+</beans>

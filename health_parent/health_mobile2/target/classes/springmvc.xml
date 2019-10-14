@@ -12,7 +12,7 @@
 <!--    dubbo应用名称-->
     <dubbo:application name="health_controller"/>
 <!--    指定服务注册中心地址-->
-    <dubbo:registry address="zookeeper://192.168.17.79:2181"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 <!--    dubbo宝扫描-->
     <dubbo:annotation package="cn.chen.controller"/>
 <!--    设置超时全局时间，check是否检测服务提供方是否开启-->

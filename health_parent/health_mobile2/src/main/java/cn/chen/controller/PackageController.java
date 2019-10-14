@@ -5,6 +5,7 @@ import cn.chen.entity.Result;
 import cn.chen.pojo.Package;
 import cn.chen.service.PackageService;
 import cn.chen.utils.QiNiuUtil;
+import cn.chen.utils.SMSUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class PackageController {
         try {
             List<Package> resultPackage = packageService.findAll();
             for (Package aPackage : resultPackage) {
-                aPackage.setImg(QiNiuUtil.DOMAIN+"/"+aPackage.getImg());
+                aPackage.setImg("http://"+QiNiuUtil.DOMAIN+"/"+aPackage.getImg());
             }
             return new Result(true,MessageConstant.QUERY_PACKAGE_SUCCESS,resultPackage);
         } catch (Exception e) {
@@ -41,6 +42,8 @@ public class PackageController {
     @PostMapping("/findById")
     public Result findById(int id){
         Package aPackage = packageService.findById(id);
+        aPackage.setImg("http://"+QiNiuUtil.DOMAIN+"/"+aPackage.getImg());
         return new Result(true, MessageConstant.QUERY_PACKAGE_FAIL,aPackage);
     }
+
 }

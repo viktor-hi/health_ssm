@@ -16,4 +16,7 @@
     <select id="findOrderSettingByDates" parameterType="String" resultType="OrderSetting">
         select * from t_ordersetting where orderdate between #{startDate} and #{endDate}
     </select>
+    <delete id="deleteByDay" parameterType="String">
+        delete from t_ordersetting where orderdate between #{startDate} and #{endDate}
+    </delete>
 </mapper>

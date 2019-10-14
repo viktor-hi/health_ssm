@@ -15,8 +15,8 @@
         <module>health_service</module>
         <module>health_web</module>
         <module>health_jobs</module>
-        <module>health_mobile</module>
         <module>health_mobile2</module>
+        <module>securityDemo</module>
     </modules>
     <packaging>pom</packaging>
 

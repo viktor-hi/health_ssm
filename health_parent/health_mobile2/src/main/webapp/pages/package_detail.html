@@ -94,7 +94,7 @@
             axios.post("/package/findById.do?id=" + id).then((response) => {
                 if(response.data.flag){
                     this.package = response.data.data;
-                    this.imgUrl = 'http://127.0.0.1:9090/uploads/' + this.package.img;
+                    this.imgUrl =this.package.img;
                 }
             });
         }

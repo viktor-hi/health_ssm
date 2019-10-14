@@ -1,6 +1,7 @@
 package cn.chen.dao;
 
 import cn.chen.pojo.CheckItem;
+import cn.chen.pojo.User;
 import com.github.pagehelper.Page;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface UserDao {
     void deleteById(int id);
 
     List<CheckItem> findAll();
+
+    User findUserByUsername(String username);
 }
